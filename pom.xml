@@ -73,15 +73,24 @@
 			<scope>test</scope>
 		</dependency>
 
-
-	   <dependency>
-            <groupId>nz.ac.waikato.cms.weka</groupId>
-            <artifactId>weka-stable</artifactId>
-            <version>3.8.6</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/weka.jar</systemPath>
-        </dependency>
-
+<!-- caso 1
+	-->
+		<!-- dependencia 
+			<dependency>
+				  <groupId>nz.ac.waikato.cms.weka</groupId>
+				  <artifactId>weka-stable</artifactId>
+				  <version>3.8.6</version>
+				  <scope>system</scope>
+				  <systemPath>${project.basedir}/lib/weka.jar</systemPath>
+			   </dependency>
+		-->
+<!-- caso 2
+	-->
+<dependency>
+    <groupId>nz.ac.waikato.cms.weka</groupId>
+    <artifactId>weka-stable</artifactId>
+    <version>3.8.6</version>
+</dependency>
 
 
        <dependency>
