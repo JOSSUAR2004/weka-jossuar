@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Predicción de Diabetes</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <h1>Predicción de Diabetes</h1>
+
+    <form th:action="@{/prediction/predecir}" th:object="${diabetesData}" method="post">
+        <label>Embarazos:</label>
+        <input type="number" th:field="*{preg}" required><br><br>
+
+        <label>Glucosa en plasma:</label>
+        <input type="number" th:field="*{plas}" required><br><br>
+
+        <label>Presión arterial:</label>
+        <input type="number" th:field="*{pres}" required><br><br>
+
+        <label>Grosor de piel:</label>
+        <input type="number" th:field="*{skin}" required><br><br>
+
+        <label>Insulina:</label>
+        <input type="number" th:field="*{insu}" required><br><br>
+
+        <label>IMC:</label>
+        <input type="number" step="0.1" th:field="*{mass}" required><br><br>
+
+        <label>Función de pedigrí:</label>
+        <input type="number" step="0.001" th:field="*{pedi}" required><br><br>
+
+        <label>Edad:</label>
+        <input type="number" th:field="*{age}" required><br><br>
+
+        <button type="submit">Predecir</button>
+    </form>
+
+    <!-- Error Message (if any) -->
+    <div th:if="${error}" class="error">
+        <p th:text="${error}"></p>
+    </div>
+
+    <!-- Result Section (shown only after prediction) -->
+    <div th:if="${showResult}" class="result-section">
+        <h2>Resultado de la Predicción</h2>
+        <p>Predicción: <strong th:text="${prediccion}"></strong></p>
+        <p>Confianza: <strong th:text="${confianza}"></strong></p>
+
+        <h3>Datos Enviados</h3>
+        <p>Embarazos: <span th:text="${diabetesData.preg}"></span></p>
+        <p>Glucosa en plasma: <span th:text="${diabetesData.plas}"></span></p>
+        <p>Presión arterial: <span th:text="${diabetesData.pres}"></span></p>
+        <p>Grosor de piel: <span th:text="${diabetesData.skin}"></span></p>
+        <p>Insulina: <span th:text="${diabetesData.insu}"></span></p>
+        <p>IMC: <span th:text="${#numbers.formatDecimal(diabetesData.mass, 1, 2, 'COMMA')}"></span></p>
+        <p>Función de pedigrí: <span th:text="${#numbers.formatDecimal(diabetesData.pedi, 1, 3, 'COMMA')}"></span></p>
+        <p>Edad: <span th:text="${diabetesData.age}"></span></p>
+    </div>
+</body>
+</html>

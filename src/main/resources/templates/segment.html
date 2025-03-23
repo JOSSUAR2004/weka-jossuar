@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Predicción de Segmentos</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" >
+</head>
+<body>
+    <h1>Predicción de Segmentos</h1>
+
+    <form th:action="@{/segment/predecir}" th:object="${segmentData}" method="post">
+        <label>Region Centroid Col:</label>
+        <input type="text" th:field="*{regionCentroidCol}" pattern="-?[0-9]*\.?[0-9]+" required><br><br>
+
+        <label>Region Centroid Row:</label>
+        <input type="text" th:field="*{regionCentroidRow}" pattern="-?[0-9]*\.?[0-9]+" required><br><br>
+
+        <label>Region Pixel Count:</label>
+        <input type="text" th:field="*{regionPixelCount}" pattern="-?[0-9]+" required><br><br>
+
+        <label>Short Line Density 5:</label>
+        <input type="text" th:field="*{shortLineDensity5}" pattern="-?[0-9]*\.?[0-9]+" required><br><br>
+
+        <label>Short Line Density 2:</label>
+        <input type="text" th:field="*{shortLineDensity2}" pattern="-?[0-9]*\.?[0-9]+" required><br><br>
+
+        <label>Vedge Mean:</label>
+        <input type="text" th:field="*{vedgeMean}" pattern="-?[0-9]*\.?[0-9]+" required><br><br>
+
+        <label>Vedge SD:</label>
+        <input type="text" th:field="*{vegdeSd}" pattern="-?[0-9]*\.?[0-9]+" required><br><br>
+
+        <label>Hedge Mean:</label>
+        <input type="text" th:field="*{hedgeMean}" pattern="-?[0-9]*\.?[0-9]+" required><br><br>
+
+        <label>Hedge SD:</label>
+        <input type="text" th:field="*{hedgeSd}" pattern="-?[0-9]*\.?[0-9]+" required><br><br>
+
+        <label>Intensity Mean:</label>
+        <input type="text" th:field="*{intensityMean}" pattern="-?[0-9]*\.?[0-9]+" required><br><br>
+
+        <label>Raw Red Mean:</label>
+        <input type="text" th:field="*{rawredMean}" pattern="-?[0-9]*\.?[0-9]+" required><br><br>
+
+        <label>Raw Blue Mean:</label>
+        <input type="text" th:field="*{rawblueMean}" pattern="-?[0-9]*\.?[0-9]+" required><br><br>
+
+        <label>Raw Green Mean:</label>
+        <input type="text" th:field="*{rawgreenMean}" pattern="-?[0-9]*\.?[0-9]+" required><br><br>
+
+        <label>Ex Red Mean:</label>
+        <input type="text" th:field="*{exredMean}" pattern="-?[0-9]*\.?[0-9]+" required><br><br>
+
+        <label>Ex Blue Mean:</label>
+        <input type="text" th:field="*{exblueMean}" pattern="-?[0-9]*\.?[0-9]+" required><br><br>
+
+        <label>Ex Green Mean:</label>
+        <input type="text" th:field="*{exgreenMean}" pattern="-?[0-9]*\.?[0-9]+" required><br><br>
+
+        <label>Value Mean:</label>
+        <input type="text" th:field="*{valueMean}" pattern="-?[0-9]*\.?[0-9]+" required><br><br>
+
+        <label>Saturation Mean:</label>
+        <input type="text" th:field="*{saturationMean}" pattern="-?[0-9]*\.?[0-9]+" required><br><br>
+
+        <label>Hue Mean:</label>
+        <input type="text" th:field="*{hueMean}" pattern="-?[0-9]*\.?[0-9]+" required><br><br>
+
+        <button type="submit">Predecir</button>
+    </form>
+
+    <div th:if="${error}" class="error">
+        <p th:text="${error}"></p>
+    </div>
+
+    <div th:if="${showResult}" class="result-section">
+        <h2>Resultado de la Predicción</h2>
+        <p>Predicción: <strong th:text="${prediccion}"></strong></p>
+        <p>Confianza: <strong th:text="${confianza}"></strong></p>
+
+        <h3>Datos Enviados</h3>
+        <p>Region Centroid Col: <span th:text="${#numbers.formatDecimal(segmentData.regionCentroidCol, 1, 5, 'POINT')}"></span></p>
+        <p>Region Centroid Row: <span th:text="${#numbers.formatDecimal(segmentData.regionCentroidRow, 1, 5, 'POINT')}"></span></p>
+        <p>Region Pixel Count: <span th:text="${segmentData.regionPixelCount}"></span></p>
+        <p>Short Line Density 5: <span th:text="${#numbers.formatDecimal(segmentData.shortLineDensity5, 1, 5, 'POINT')}"></span></p>
+        <p>Short Line Density 2: <span th:text="${#numbers.formatDecimal(segmentData.shortLineDensity2, 1, 5, 'POINT')}"></span></p>
+        <p>Vedge Mean: <span th:text="${#numbers.formatDecimal(segmentData.vedgeMean, 1, 5, 'POINT')}"></span></p>
+        <p>Vedge SD: <span th:text="${#numbers.formatDecimal(segmentData.vegdeSd, 1, 5, 'POINT')}"></span></p>
+        <p>Hedge Mean: <span th:text="${#numbers.formatDecimal(segmentData.hedgeMean, 1, 5, 'POINT')}"></span></p>
+        <p>Hedge SD: <span th:text="${#numbers.formatDecimal(segmentData.hedgeSd, 1, 5, 'POINT')}"></span></p>
+        <p>Intensity Mean: <span th:text="${#numbers.formatDecimal(segmentData.intensityMean, 1, 5, 'POINT')}"></span></p>
+        <p>Raw Red Mean: <span th:text="${#numbers.formatDecimal(segmentData.rawredMean, 1, 5, 'POINT')}"></span></p>
+        <p>Raw Blue Mean: <span th:text="${#numbers.formatDecimal(segmentData.rawblueMean, 1, 5, 'POINT')}"></span></p>
+        <p>Raw Green Mean: <span th:text="${#numbers.formatDecimal(segmentData.rawgreenMean, 1, 5, 'POINT')}"></span></p>
+        <p>Ex Red Mean: <span th:text="${#numbers.formatDecimal(segmentData.exredMean, 1, 5, 'POINT')}"></span></p>
+        <p>Ex Blue Mean: <span th:text="${#numbers.formatDecimal(segmentData.exblueMean, 1, 5, 'POINT')}"></span></p>
+        <p>Ex Green Mean: <span th:text="${#numbers.formatDecimal(segmentData.exgreenMean, 1, 5, 'POINT')}"></span></p>
+        <p>Value Mean: <span th:text="${#numbers.formatDecimal(segmentData.valueMean, 1, 5, 'POINT')}"></span></p>
+        <p>Saturation Mean: <span th:text="${#numbers.formatDecimal(segmentData.saturationMean, 1, 5, 'POINT')}"></span></p>
+        <p>Hue Mean: <span th:text="${#numbers.formatDecimal(segmentData.hueMean, 1, 5, 'POINT')}"></span></p>
+    </div>
+</body>
+</html>
