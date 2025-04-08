@@ -10,7 +10,7 @@ import com.example.demo.service.dto.PredictionDiabetes;
 
 
 @Controller
-@RequestMapping("/prediction")
+@RequestMapping("/predictio")
 public class DiabetesController {
 
     private final DiabetesService predictionService;
