@@ -8,9 +8,8 @@ import com.example.demo.model.DiabetesData;
 import com.example.demo.service.DiabetesService;
 import com.example.demo.service.dto.PredictionDiabetes;
 
-
 @Controller
-@RequestMapping("/predictio")
+@RequestMapping("/prediction")
 public class DiabetesController {
 
     private final DiabetesService predictionService;

@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Predicción de Diabetes</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
+
 <body>
     <h1>Predicción de Diabetes</h1>
 
@@ -36,6 +38,10 @@
         <button type="submit">Predecir</button>
     </form>
 
+    <form action="/segment" method="get">
+        <button type="submit">Ir a Predicción de Segment</button>
+    </form>
+
     <!-- Error Message (if any) -->
     <div th:if="${error}" class="error">
         <p th:text="${error}"></p>
@@ -58,4 +64,5 @@
         <p>Edad: <span th:text="${diabetesData.age}"></span></p>
     </div>
 </body>
+
 </html>
