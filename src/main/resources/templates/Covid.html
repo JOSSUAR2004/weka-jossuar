@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Predicción de Severidad COVID-19</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
+<body>
+    <h1>Predicción de Severidad COVID-19</h1>
+
+    <form th:action="@{/covid/predecir}" th:object="${covidData}" method="post">
+        <label>Edad (años):</label>
+        <input type="number" th:field="*{age}" required><br><br>
+
+        <label>Temperatura corporal (°C):</label>
+        <input type="number" step="0.1" th:field="*{bodyTemp}" required><br><br>
+
+        <label>Saturación de oxígeno (%):</label>
+        <input type="number" step="0.1" th:field="*{oxygenSat}" required><br><br>
+
+        <label>Frecuencia respiratoria (rpm):</label>
+        <input type="number" th:field="*{respiratoryRate}" required><br><br>
+
+        <label>Linfocitos (x10⁹/L):</label>
+        <input type="number" step="0.01" th:field="*{lymphocytes}" required><br><br>
+
+        <label>Proteína C Reactiva (mg/L):</label>
+        <input type="number" step="0.1" th:field="*{crp}" required><br><br>
+
+        <button type="submit">Predecir Severidad</button>
+    </form>
+
+    <!-- Error Message (if any) -->
+    <div th:if="${error}" class="error">
+        <p th:text="${error}"></p>
+    </div>
+
+    <!-- Result Section (shown only after prediction) -->
+    <div th:if="${showResult}" class="result-section">
+        <h2>Resultado de la Predicción</h2>
+        <p>Nivel de severidad:
+            <strong th:text="${covidData.severity}">
+            </strong>
+        </p>
+        <p>Confianza: <strong th:text="${covidData.confidence}"></strong></p>
+        <h3>Datos Clínicos Enviados</h3>
+        <p>Edad: <span th:text="${covidData.age}"></span> años</p>
+        <p>Temperatura: <span th:text="${#numbers.formatDecimal(covidData.bodyTemp, 1, 1, 'COMMA')}"></span> °C</p>
+        <p>Saturación O₂: <span th:text="${#numbers.formatDecimal(covidData.oxygenSat, 1, 1, 'COMMA')}"></span>%</p>
+        <p>Frecuencia respiratoria: <span th:text="${covidData.respiratoryRate}"></span> rpm</p>
+        <p>Linfocitos: <span th:text="${#numbers.formatDecimal(covidData.lymphocytes, 1, 2, 'COMMA')}"></span> x10⁹/L
+        </p>
+        <p>Proteína C Reactiva: <span th:text="${#numbers.formatDecimal(covidData.crp, 1, 1, 'COMMA')}"></span> mg/L</p>
+    </div>
+
+    <!-- Botón para volver al menú principal (opcional) -->
+    <div style="margin-top: 20px;">
+        <a th:href="@{/}">Volver al Menú Principal</a>
+    </div>
+</body>
+
+</html>
